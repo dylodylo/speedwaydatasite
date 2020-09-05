@@ -255,7 +255,8 @@ def select_all_scores():
 
 
 def select_scores_with_data(rider_name, track):
-    command = """SELECT * FROM scores WHERE name=%s AND track=%s"""
+    command = """select name, points, bonuses, details, track, date from scores JOIN matches on (match_id = matches.id)
+     WHERE name=%s AND track=%s"""
     conn = None
     score = None
     try:
@@ -267,23 +268,12 @@ def select_scores_with_data(rider_name, track):
         # create table one by one
         cur.execute(command, (rider_name, track))
         scores = cur.fetchall()
-        newscores = []
-        for score in scores:
-            score = list(score)
-            match_id = str(score[7])
-            command = """SELECT date FROM matches WHERE id = %s"""
-            cur.execute(command, (match_id,))
-            date = cur.fetchall()
-            score.append(date[0][0].strftime('%d/%m/%Y'))
-            newscores.append(score)
-        # close communication with the PostgreSQL database server
-        cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
         if conn is not None:
             conn.close()
-    if newscores:
-        return newscores
+    if scores:
+        return scores
     else:
         return False
