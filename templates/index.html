@@ -1,11 +1,18 @@
 {% extends "base.html" %}
-{% block title %}Statystyki żużlowców {% endblock %}
+{% block title %}Riders statistics {% endblock %}
 {% block content %}
+    <div class="p-3 mb-2 bg-dark text-white">
     <form action="#" method="post">
         <p>Name: <input type="text" name="ridername" /></p>
         <p>Track: <input type="text" name="track" /> </p>
-        <p><input type="submit" name="submit" /></p>
+        <p><input type="submit" name="submit" value="Show results"/></p>
     </form>
+        <p><h3>Wskazówki:</h3></p>
+        <p>Zawodnika wyszukujemy jako pierwszą głoskę imienia, kropka, nazwisko, np: M.JANOWSKI, Prz.PAWLICKI. Nazwę
+            toru zapisujemy jako nazwę miasta, wielką literą, np. Grudziądz, Leszno. Niektóre nazwiska, które mogą
+            sprawić problem: E.SAYFUTDINOV, V.MILIK jr., Pi.PAWLICKI jr., G.TCHUGUNOV, Ch.HOLDER.</p>
+        <p>Wyniki obejmują tylko zawody ligowe w sezonach 2016-2019.</p>
+    </div>
   <table class="table table-striped table-dark">
      <thead>
         <tr>
